@@ -1,0 +1,60 @@
+﻿{
+    "manifestVersion": 1,
+    "id": "archiveremotefolder-task",
+    "name": "Archive Remote Folder Task",
+    "version": "0.1.6",
+    "publisher": "ggarbuglia",
+    "description": "Archive Remote Folder Task for Team System and Team Foundation Server",
+    "public": true,
+    "icons": {
+        "default": "images/ArchiveRemoteFolder64.png",
+        "large": "images/ArchiveRemoteFolder512.png"
+    },
+    "screenshots": [],
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "utility",
+        "tasks"
+    ],
+    "branding": {
+        "color": "#f6f7fb",
+        "theme": "light"
+    },	
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "files": [
+      {
+        "path": "ArchiveRemoteFolder"
+      },
+      {
+        "path": "images",
+        "addressable": true
+      }
+    ],
+    "scopes": [
+        "vso.build_execute",
+        "vso.serviceendpoint_manage"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "archiveremotefolder-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "ArchiveRemoteFolder"
+            }
+        }
+    ]
+}

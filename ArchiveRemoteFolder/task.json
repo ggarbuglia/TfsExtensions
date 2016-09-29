@@ -1,0 +1,116 @@
+{
+  "id": "3629B489-488B-4D5C-A55C-63D95E98C969",
+  "name": "ArchiveRemoteFolder",
+  "friendlyName": "Archive Remote Folder",
+  "description": "Run a PowerShell script to archive a remote folder.",
+  "author": "ggarbuglia",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+        "DotNetFramework"
+    ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "6"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Powershell",
+  "groups": [
+        {
+            "name": "remoteserver",
+            "displayName": "Remote Server",
+            "isExpanded": true
+        },
+        {
+            "name": "remotepaths",
+            "displayName": "Remote Paths",
+            "isExpanded": true
+        }
+    ],
+  "inputs": [
+    { 
+        "name": "server", 
+        "type": "string", 
+        "label": "Server", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "FQDN of the server you want to reach.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminusr", 
+        "type": "string", 
+        "label": "Admin User", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Server Administrator as domain\\user. You can use a variable.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminpwd", 
+        "type": "string", 
+        "label": "Admin Password", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Server Administrator as password. You may use a variable marked as Secure.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "securevariablename", 
+        "type": "string", 
+        "label": "Password Variable", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The secured password variable name without special characters $ ( ).",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "sourcepath", 
+        "type": "string", 
+        "label": "Source Path", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "A local path on the remote server.",
+        "groupName": "remotepaths"
+    },
+    { 
+        "name": "targetpath", 
+        "type": "string", 
+        "label": "Target Path", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "A local path on the remote server or a network share where the user has write permissions.",
+        "groupName": "remotepaths"
+    },
+    { 
+        "name": "filename", 
+        "type": "string", 
+        "label": "7z Filename", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The archive file name (with or without extension).",
+        "groupName": "remotepaths"
+    },
+    { 
+        "name": "datestampformat", 
+        "type": "string", 
+        "label": "Date Stamp Format", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The archive file name datetime format (like yyyyMMddhhmm).",
+        "groupName": "remotepaths"
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\task.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
