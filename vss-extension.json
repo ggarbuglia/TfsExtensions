@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "archiveremotefolder-task",
     "name": "Archive Remote Folder Task",
-    "version": "0.1.6",
+    "version": "0.1.9",
     "publisher": "ggarbuglia",
     "description": "Archive Remote Folder Task for Team System and Team Foundation Server",
     "public": true,

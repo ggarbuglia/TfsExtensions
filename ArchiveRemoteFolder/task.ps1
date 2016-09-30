@@ -1,28 +1,21 @@
 param (
-    [Parameter(Mandatory=$true)][string] $server,
-    [Parameter(Mandatory=$true)][string] $adminusr,
-    [Parameter(Mandatory=$true)][string] $adminpwd,
-    [Parameter(Mandatory=$true)][string] $securevariablename,
-    [Parameter(Mandatory=$true)][string] $sourcepath,
-    [Parameter(Mandatory=$true)][string] $targetpath,
-    [Parameter(Mandatory=$true)][string] $filename,
-    [Parameter(Mandatory=$true)][string] $datestampformat
+    [string] $server,
+    [string] $adminusr,
+    [string] $adminpwd,
+    [string] $sourcepath,
+    [string] $targetpath,
+    [string] $filename,
+    [string] $datestampformat
 )
 
-Write-Host "Entering task.ps1";
+Write-Host "Entering script task.ps1";
 
 Write-Verbose "Remote Server:      $server";
 Write-Verbose "Admin User:         $adminusr";
-Write-Verbose "Password Variable:  $securevariablename";
 Write-Verbose "Remote Source Path: $sourcepath";
 Write-Verbose "Remote Target Path: $targetpath";
 Write-Verbose "7z Filename:        $filename";
 Write-Verbose "Date Stamp Format:  $datestampformat";
-
-Write-Host "Importing modules Microsoft.TeamFoundation.DistributedTask.Task.*";
-Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common";
-Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal";
-Write-Host "Modules imported.";
 
 Write-Host "Validating Source Path variable.";
 
@@ -51,8 +44,6 @@ Write-Host "Filename is $filename.";
 $Source = "$sourcepath*.*"
 $7zFile = "$targetpath$filename";
 
-$adminpwd = Get-TaskVariable -Context $distributedTaskContext -Name $securevariablename;
-
 Write-Host "Creating Secured Credentials.";
 $Credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
@@ -62,4 +53,4 @@ $Session = New-PSSession -ComputerName $server -Credential $Credential;
 Write-Host "Invoking 7z executable on remote server.";
 Invoke-Command -Session $Session { Set-Alias 7z "$env:ProgramFiles\7-Zip\7z.exe"; 7z a -t7z $args[0] $args[1] } -ArgumentList $7zFile, $Source;
 
-Write-Host "Exiting task.ps1";
+Write-Host "Leaving script task.ps1";

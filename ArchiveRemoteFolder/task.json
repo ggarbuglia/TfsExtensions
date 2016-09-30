@@ -16,10 +16,10 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "6"
+    "Patch": "9"
   },
   "minimumAgentVersion": "1.83.0",
-  "instanceNameFormat": "Powershell",
+  "instanceNameFormat": "Archive Remote Folder $(sourcepath)",
   "groups": [
         {
             "name": "remoteserver",
@@ -39,7 +39,7 @@
         "label": "Server", 
         "defaultValue": "", 
         "required": true,
-        "helpMarkDown": "FQDN of the server you want to reach.",
+        "helpMarkDown": "FQDN of the remote machine you want to reach.",
         "groupName": "remoteserver"
     },
     { 
@@ -48,7 +48,7 @@
         "label": "Admin User", 
         "defaultValue": "", 
         "required": true,
-        "helpMarkDown": "Server Administrator as domain\\user. You can use a variable.",
+        "helpMarkDown": "Administrator login for the remote machine.",
         "groupName": "remoteserver"
     },
     { 
@@ -57,16 +57,7 @@
         "label": "Admin Password", 
         "defaultValue": "", 
         "required": true,
-        "helpMarkDown": "Server Administrator as password. You may use a variable marked as Secure.",
-        "groupName": "remoteserver"
-    },
-    { 
-        "name": "securevariablename", 
-        "type": "string", 
-        "label": "Password Variable", 
-        "defaultValue": "", 
-        "required": true,
-        "helpMarkDown": "The secured password variable name without special characters $ ( ).",
+        "helpMarkDown": "Password for administrator login for the remote machine.<br>It can accept variable defined in Build/Release definitions as '$(passwordVariable)'.<br>You may mark variable type as 'secret' to secure it.",
         "groupName": "remoteserver"
     },
     { 
