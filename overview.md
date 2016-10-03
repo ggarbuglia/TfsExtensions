@@ -20,7 +20,7 @@ Date Stamp Format = A file name datetime format.
 Retension Days = The archive folder retension in days.
 
 ## Versions
-0.2.0
+0.2.1
 Powershell code cleanup.
 7z.exe existence validation added.
 Target folder retension days (cleanup) added.

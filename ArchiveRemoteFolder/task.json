@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "2",
-    "Patch": "0"
+    "Patch": "1"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Archive Remote Folder $(sourcepath)",
@@ -95,7 +95,7 @@
         "required": true,
         "helpMarkDown": "The archive file name datetime format.",
         "groupName": "remotepaths"
-    }
+    },
     { 
         "name": "retensiondays", 
         "type": "string", 
