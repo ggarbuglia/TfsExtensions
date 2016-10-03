@@ -15,8 +15,8 @@
     ],
   "version": {
     "Major": "0",
-    "Minor": "1",
-    "Patch": "9"
+    "Minor": "2",
+    "Patch": "0"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Archive Remote Folder $(sourcepath)",
@@ -36,7 +36,7 @@
     { 
         "name": "server", 
         "type": "string", 
-        "label": "Server", 
+        "label": "Remote Machine", 
         "defaultValue": "", 
         "required": true,
         "helpMarkDown": "FQDN of the remote machine you want to reach.",
@@ -45,7 +45,7 @@
     { 
         "name": "adminusr", 
         "type": "string", 
-        "label": "Admin User", 
+        "label": "Admin Login", 
         "defaultValue": "", 
         "required": true,
         "helpMarkDown": "Administrator login for the remote machine.",
@@ -91,9 +91,18 @@
         "name": "datestampformat", 
         "type": "string", 
         "label": "Date Stamp Format", 
-        "defaultValue": "", 
+        "defaultValue": "yyyyMMddhhmm", 
         "required": true,
-        "helpMarkDown": "The archive file name datetime format (like yyyyMMddhhmm).",
+        "helpMarkDown": "The archive file name datetime format.",
+        "groupName": "remotepaths"
+    }
+    { 
+        "name": "retensiondays", 
+        "type": "string", 
+        "label": "Retension Days", 
+        "defaultValue": "0", 
+        "required": true,
+        "helpMarkDown": "The archive folder retension in days (0 = retain all).",
         "groupName": "remotepaths"
     }
   ],
