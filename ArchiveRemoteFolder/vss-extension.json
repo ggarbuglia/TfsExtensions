@@ -20,17 +20,17 @@
     ],
     "links": {
         "getstarted": {
-            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/overview.md"
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/ArchiveRemoteFolder/overview.md"
         },
         "issues": {
             "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
         },
         "repository": {
-            "uri": "https://github.com/ggarbuglia/TfsExtensions"
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/ArchiveRemoteFolder"
         }
 	},
     "branding": {
-        "color": "#f6f7fb",
+        "color": "#c3c3c3",
         "theme": "light"
     },	
     "content": {
@@ -39,9 +39,6 @@
         }
     },
     "files": [
-      {
-        "path": "ArchiveRemoteFolder"
-      },
       {
         "path": "images",
         "addressable": true

@@ -5,8 +5,8 @@ param (
     [string] $sourcepath,
     [string] $targetpath,
     [string] $filename,
-    [string] $datestampformat = 'yyyyMMddhhmm',
-    [string] $retensiondays = '0'
+    [string] $datestampformat,
+    [string] $retensiondays
 )
 
 Write-Host "Entering script task.ps1";
@@ -19,7 +19,7 @@ Write-Verbose "[filename]        --> [$filename]"        -Verbose;
 Write-Verbose "[datestampformat] --> [$datestampformat]" -Verbose;
 
 ### Validates all paths ###
-function ValidateSourcePath ([string]$type, [string]$path) {
+function ValidatePath ([string]$type, [string]$path) {
     Write-Host "Validating $type Path variable.";
     if (-not $path.EndsWith("\")) { $path = "$path\"; }
     Write-Host "$type Path is $path.";
@@ -59,8 +59,8 @@ $scriptblock = {
     7z a -t7z "$targetPath$fileName" "$sourcePath*.*" 
 };
 
-$sourcepath = ValidateSourcePath -type "Source" -path $sourcepath;
-$targetpath = ValidateSourcePath -type "Target" -path $targetpath;
+$sourcepath = ValidatePath -type "Source" -path $sourcepath;
+$targetpath = ValidatePath -type "Target" -path $targetpath;
 $filename   = ValidateFilename -name $filename -format $datestampformat;
 
 Write-Host "Creating Secured Credentials.";
