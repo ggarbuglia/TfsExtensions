@@ -1,5 +1,5 @@
 {
-  "id": "3629B489-488B-4D5C-A55C-63D95E98C969",
+  "id": "D36EB85B-27EC-4545-9904-DDF8937CB613",
   "name": "RunSqlServerScripts",
   "friendlyName": "Run SQL Server Scripts",
   "description": "Runs T-SQL scripts on a remote SQL Server database.",

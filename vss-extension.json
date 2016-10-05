@@ -1,0 +1,81 @@
+﻿{
+    "manifestVersion": 1,
+    "id": "swissknife-tools",
+    "version": "0.1.0",
+    "name": "Swiss Knife Tools",
+    "publisher": "ggarbuglia",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Swiss Knife Tools for TS and TFS",
+    "icons": {
+        "default": "images/SwissKnife128.png",
+        "large": "images/SwissKnife512.png"
+    },
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "utility",
+        "tasks",
+        "backup"
+    ],
+    "screenshots": [],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/overview.md"
+        },
+        "issues": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions"
+        }
+	},
+    "branding": {
+        "color": "#c3c3c3",
+        "theme": "light"
+    },
+    "galleryFlags": [
+        "Public"
+    ],
+    "scopes": [
+        "vso.build_execute", 
+        "vso.serviceendpoint_manage" 
+    ],
+    "files": [
+      {
+        "path": "images",
+        "addressable": true
+      }
+    ],
+    "contributions": [
+        {
+            "id": "archiveremotefolder-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "ArchiveRemoteFolder" 
+            } 
+        },
+        {
+            "id": "runsqlserverscripts-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "RunSqlServerScripts" 
+            } 
+        }
+    ]
+}
