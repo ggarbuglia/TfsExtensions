@@ -19,8 +19,7 @@
     ],
     "tags": [
         "utility",
-        "tasks",
-        "backup"
+        "tasks"
     ],
     "screenshots": [],
     "content": {
@@ -30,7 +29,7 @@
     },
     "links": {
         "getstarted": {
-            "uri": "https://github.com/ggarbuglia/TfsExtensions/overview.md"
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/overview.md"
         },
         "issues": {
             "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
@@ -51,10 +50,16 @@
         "vso.serviceendpoint_manage" 
     ],
     "files": [
-      {
-        "path": "images",
-        "addressable": true
-      }
+        {
+            "path": "ArchiveRemoteFolder"
+        },
+        {
+            "path": "RunSqlServerScripts"
+        },
+        {
+            "path": "images",
+            "addressable": true
+        }
     ],
     "contributions": [
         {
