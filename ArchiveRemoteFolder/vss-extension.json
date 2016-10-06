@@ -1,18 +1,18 @@
 ﻿{
     "manifestVersion": 1,
-    "id": "swissknife-tools",
-    "version": "0.1.0",
-    "name": "Swiss Knife Tools",
+    "id": "archiveremotefolder-task",
+    "version": "0.2.3",
+    "name": "Archive Remote Folder Task",
     "publisher": "ggarbuglia",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Swiss Knife Tools for TS and TFS",
+    "description": "Archive Remote Folder Task for TS and TFS",
     "icons": {
-        "default": "images/SwissKnife128.png",
-        "large": "images/SwissKnife512.png"
+        "default": "icon128.png",
+        "large": "icon512.png"
     },
     "categories": [
         "Build and release"
@@ -29,13 +29,13 @@
     },
     "links": {
         "getstarted": {
-            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/overview.md"
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/ArchiveRemoteFolder/overview.md"
         },
         "issues": {
             "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
         },
         "repository": {
-            "uri": "https://github.com/ggarbuglia/TfsExtensions"
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/ArchiveRemoteFolder"
         }
 	},
     "branding": {
@@ -49,18 +49,6 @@
         "vso.build_execute", 
         "vso.serviceendpoint_manage" 
     ],
-    "files": [
-        {
-            "path": "ArchiveRemoteFolder"
-        },
-        {
-            "path": "RunSqlServerScripts"
-        },
-        {
-            "path": "images",
-            "addressable": true
-        }
-    ],
     "contributions": [
         {
             "id": "archiveremotefolder-task",
@@ -70,16 +58,6 @@
             ], 
             "properties": { 
                 "name": "ArchiveRemoteFolder" 
-            } 
-        },
-        {
-            "id": "runsqlserverscripts-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ], 
-            "properties": { 
-                "name": "RunSqlServerScripts" 
             } 
         }
     ]
