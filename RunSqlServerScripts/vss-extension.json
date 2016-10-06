@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "runsqlserverscripts-task",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "Run SQL Server Scripts Task",
     "publisher": "ggarbuglia",
     "targets": [

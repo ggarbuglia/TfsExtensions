@@ -31,5 +31,8 @@ Database Password         = Password for the remote database. If blank, then the
 Wait (Seconds)            = The time in seconds between each script execution. Some times you need some space between executions to let the engine finish the script.
 
 ## Versions
+0.1.1
+Extension manifest changed.
+
 0.1.0 
 Initial versión on Visual Studio MarketPlace.
