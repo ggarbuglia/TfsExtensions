@@ -49,6 +49,11 @@
         "vso.build_execute", 
         "vso.serviceendpoint_manage" 
     ],
+    "files": [
+        {
+            "path": "Task"
+        }
+    ],
     "contributions": [
         {
             "id": "archiveremotefolder-task",
@@ -57,7 +62,7 @@
                 "ms.vss-distributed-task.tasks"
             ], 
             "properties": { 
-                "name": "ArchiveRemoteFolder" 
+                "name": "Task" 
             } 
         }
     ]

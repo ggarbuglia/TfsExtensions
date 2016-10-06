@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "swissknife-tools",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "name": "Swiss Knife Tools",
     "publisher": "ggarbuglia",
     "targets": [
@@ -69,7 +69,7 @@
                 "ms.vss-distributed-task.tasks"
             ], 
             "properties": { 
-                "name": "ArchiveRemoteFolder" 
+                "name": "ArchiveRemoteFolder/Task" 
             } 
         },
         {
@@ -79,7 +79,7 @@
                 "ms.vss-distributed-task.tasks"
             ], 
             "properties": { 
-                "name": "RunSqlServerScripts" 
+                "name": "RunSqlServerScripts/Task" 
             } 
         }
     ]
