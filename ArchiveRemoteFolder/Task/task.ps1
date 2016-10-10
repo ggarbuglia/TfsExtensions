@@ -63,13 +63,28 @@ $sourcepath = ValidatePath -type "Source" -path $sourcepath;
 $targetpath = ValidatePath -type "Target" -path $targetpath;
 $filename   = ValidateFilename -name $filename -format $datestampformat;
 
-Write-Host "Creating Secured Credentials.";
-$credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
+[System.Management.Automation.Runspaces.PSSession] $session = $null;
 
-Write-Host "Opening Powershel remote session on $server.";
-$session = New-PSSession -ComputerName $server -Credential $credential;
+Try 
+{
+    Write-Host "Creating Secured Credentials.";
+    $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
-Write-Host "Invoking 7z executable on remote server.";
-Invoke-Command -Session $session -ScriptBlock $scriptblock -ArgumentList $sourcepath, $targetpath, $filename, $retensiondays;
+    Write-Host "Opening Powershel remote session on $server.";
+    $session = New-PSSession -ComputerName $server -Credential $credential;
+
+    Write-Host "Invoking 7z executable on remote server.";
+    Invoke-Command -Session $session -ScriptBlock $scriptblock -ArgumentList $sourcepath, $targetpath, $filename, $retensiondays;
+}
+Catch 
+{
+    Write-Host;
+    Write-Error $_;
+}
+Finally 
+{
+    Write-Host "Closing Powershell remote session on $server.";
+    if ($session -ne $null) { $session | Disconnect-PSSession | Remove-PSSession };
+}
 
 Write-Host "Leaving script task.ps1";
