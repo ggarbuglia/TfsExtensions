@@ -28,8 +28,6 @@ function ValidatePath ([string]$type, [string]$path) {
     return $path;
 }
 
-cls;
-
 if ($waitseconds -eq '' -or $waitseconds -eq $null) { $waitseconds = '3'; }
 if ($dbusr -eq '' -or $dbusr -eq $null) { $dbusr = $adminusr; }
 if ($dbpwd -eq '' -or $dbpwd -eq $null) { $dbpwd = $adminpwd; }
@@ -66,22 +64,37 @@ $sb3 = {
     if (Test-Path $tempPath) { Remove-Item $tempPath -Recurse | Out-Null; }
 };
 
-Write-Host "Creating Secured Credentials.";
-$credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
+[System.Management.Automation.Runspaces.PSSession] $session = $null;
 
-Write-Host "Opening Powershel remote session on $server.";
-$session = New-PSSession -Name SQL -ComputerName $server -Credential $credential;
+Try 
+{
+    Write-Host "Creating Secured Credentials.";
+    $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
-Write-Host "Setting up remote session.";
-Invoke-Command -Session $session -ScriptBlock $sb1 -ArgumentList $server, $instance, $dbname, $dbusr, $dbpwd, $targetpath, $waitseconds;
+    Write-Host "Opening Powershell remote session on $server.";
+    $session = New-PSSession -Name SQL -ComputerName $server -Credential $credential;
 
-Write-Host "Copying scripts to remote session.";
-Copy-Item -Path "$sourcepath*.sql" -Destination $targetpath -ToSession $session -Force;
+    Write-Host "Setting up remote session.";
+    Invoke-Command -Session $session -ScriptBlock $sb1 -ArgumentList $server, $instance, $dbname, $dbusr, $dbpwd, $targetpath, $waitseconds;
+    
+    Write-Host "Copying scripts to remote session.";
+    Copy-Item -Path "$sourcepath*.sql" -Destination $targetpath -ToSession $session -Force;
 
-Write-Host "Running scripts on remote server.";
-Invoke-Command -Session $session -ScriptBlock $sb2;
+    Write-Host "Running scripts on remote server.";
+    Invoke-Command -Session $session -ScriptBlock $sb2;
 
-Write-Host "Removing scripts from remote server.";
-Invoke-Command -Session $session -ScriptBlock $sb3;
+    Write-Host "Removing scripts from remote server.";
+    Invoke-Command -Session $session -ScriptBlock $sb3;
+}
+Catch 
+{
+    Write-Host;
+    Write-Error $_;
+}
+Finally 
+{
+    Write-Host "Closing Powershell remote session on $server.";
+    if ($session -ne $null) { $session | Disconnect-PSSession | Remove-PSSession };
+}
 
 Write-Host "Leaving script task.ps1";
