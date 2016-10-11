@@ -1,0 +1,69 @@
+﻿{
+    "manifestVersion": 1,
+    "id": "publishtosharepoint-task",
+    "version": "0.1.0",
+    "name": "Publish To SharePoint Task",
+    "publisher": "ggarbuglia",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Publish To SharePoint Task for TS and TFS",
+    "icons": {
+        "default": "icon128.png",
+        "large": "icon512.png"
+    },
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "utility",
+        "tasks"
+    ],
+    "screenshots": [],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/PublishToSharePoint/overview.md"
+        },
+        "issues": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/RunSqlServerScripts"
+        }
+	},
+    "branding": {
+        "color": "black",
+        "theme": "dark"
+    },
+    "galleryFlags": [
+        "Public"
+    ],
+    "scopes": [
+        "vso.build_execute", 
+        "vso.serviceendpoint_manage" 
+    ],
+    "files": [
+        {
+            "path": "Task"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "publishtosharepoint-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "Task" 
+            } 
+        }
+    ]
+}

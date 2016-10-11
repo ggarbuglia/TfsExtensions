@@ -1,0 +1,64 @@
+HOW TO ENABLE REMOTE POWERSHELL FOR SHAREPOINT 2013 
+
+Businesses often need certain users to be able to run PowerShell cmdlets in their SharePoint farm and they don’t want those users to be part of the local administrators group for security reasons.
+The following steps allow you to correctly configure your SharePoint servers to allow certain users access to run SharePoint PowerShell cmdlets.
+
+ON THE SHAREPOINT SERVERS:
+
+	In Server Manager, add the account(s) to the following Groups:
+		- WinRMRemoteWMIUsers__
+		- WSS_ADMIN_WPG
+
+	Run the SharePoint Management Shell as Administrator
+		- Type Enable-PSRemoting -Force
+		- Type Enable-WSManCredSSP –Role Server
+		- Type winrm set winrm/config/winrs '@{MaxShellsPerUser="25"}'
+		- Type winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="600"}'
+		- Type Get-SPShellAdmin
+			
+			This should only return all the accounts who have the SharePoint_Shell_Access role
+			To add some other account:
+
+		- Type Add-SPShellAdmin -UserName Domain\Username -Database (Get-SPContentDatabase -Identity "ContentDatabaseName")
+			- Replace Domain\Username with the user needing access
+			- Replace ContentDatabaseName with one of the Content Databases
+
+				You will need to run this command for all content databases for the user(s) who need access
+				NOTE: To grant access to all content databases use the following command:
+							Get-SPDatabase | Add-SPShellAdmin DOMAIN\UserName
+
+		- Type Get-SPShellAdmin
+
+			The user you added should now be listed
+
+		- Type Set-PSSessionConfiguration -Name Microsoft.PowerShell32 –ShowSecurityDescriptorUI
+
+			This will open up a dialog box. Add the account(s) with Read and Execute permissions then click OK
+			Run the command again to ensure the permissions were applied correctly
+
+ 
+ON THE CLIENT MACHINE:
+
+	Open Windows PowerShell as Administrator
+		- Type Enable-WSManCredSSP -Role Client -DelegateComputer "SharePointServerName"
+			Replace SharePointServerName with the FQDN of the SharePoint server
+
+		- Type $credential = Get-Credential;
+		- Type $session = New-PSSession -ComputerName "SharePointServerName" -Credential $credential -Authentication Credssp;
+			Replace SharePointServerName with the FQDN of the SharePoint server
+
+			NOTE: If this fails with an "access denied" error, re-run Step 10 on the server to enable configuration of the x64 PowerShell by running 
+			Set-PSSessionConfiguration -Name Microsoft.PowerShell32 –ShowSecurityDescriptorUI
+			
+		- Type Invoke-Command -Session $session -ScriptBlock { Add-PSSnapin Microsoft.SharePoint.PowerShell; }
+		- Type Invoke-Command -Session $session -ScriptBlock { Get-SPContentDatabase; }
+			This will return all the content databases in your SharePoint farm and ensure you have access
+
+		- Type Invoke-Command -Session $session -ScriptBlock { Get-SPServiceInstance; }
+			This will return the SharePoint service instances and ensure you have access
+
+		- Type Enter-PSSession -Session $session;
+			You will now see the servers name in [ ] PS: C:\Users\someuser\Documents
+
+
+At this point, the user can implement PowerShell scripts on the SharePoint server.

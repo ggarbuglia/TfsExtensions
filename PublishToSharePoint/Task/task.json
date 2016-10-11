@@ -1,0 +1,138 @@
+{
+  "id": "ECAD77AC-53B2-4FBA-BD2F-2983CAF7932C",
+  "name": "PublishToSharePoint",
+  "friendlyName": "Publish To SharePoint",
+  "description": "Publish files to remote SharePoint document library.",
+  "author": "ggarbuglia",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+        "DotNetFramework"
+    ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Publish To SharePoint",
+  "groups": [
+        {
+            "name": "remoteserver",
+            "displayName": "SharePoint Server",
+            "isExpanded": true
+        },
+        {
+            "name": "remotesite",
+            "displayName": "Site Collection",
+            "isExpanded": true
+        },
+        {
+            "name": "remotedoclib",
+            "displayName": "Document Library",
+            "isExpanded": true
+        }
+    ],
+  "inputs": [
+    { 
+        "name": "sourcepath", 
+        "type": "string", 
+        "label": "Source Folder", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The local folder where you have your file(s)."
+    },
+    { 
+        "name": "server", 
+        "type": "string", 
+        "label": "SharePoint Server", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The FQDN of the SharePoint server you want to reach.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminusr", 
+        "type": "string", 
+        "label": "Admin Login", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Administrator login for the remote machine. Account must have ShellAdmin permissions (see overview).",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminpwd", 
+        "type": "string", 
+        "label": "Admin Password", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Password for administrator login for the remote machine.<br>It can accept variable defined in Build/Release definitions as '$(passwordVariable)'.<br>You may mark variable type as 'secret' to secure it.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "spsiteurl", 
+        "type": "string", 
+        "label": "Site Url", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The SharePoint Site Collection Url you want to reach (like 'http://sharepoint').",
+        "groupName": "remotesite"
+    },
+    { 
+        "name": "spweburl", 
+        "type": "string", 
+        "label": "Web Relative Path", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The SharePoint Web relative path you want to reach (like '/web1/web2').",
+        "groupName": "remotesite"
+    },
+    { 
+        "name": "username", 
+        "type": "string", 
+        "label": "User Account", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The user account [domain\\username] to impersonate file upload.",
+        "groupName": "remotesite"
+    },
+    { 
+        "name": "doclibname", 
+        "type": "string", 
+        "label": "Library Name", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The SharePoint Document Library name.",
+        "groupName": "remotedoclib"
+    },
+    { 
+        "name": "doclibfolder", 
+        "type": "string", 
+        "label": "Folder Path", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The folder or folder path inside your Document Library (like 'level1/level2').",
+        "groupName": "remotedoclib"
+    },
+    { 
+        "name": "createfolders", 
+        "type": "boolean", 
+        "label": "Auto Create Folder", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "If your folder definition does not exists I will create it for you.",
+        "groupName": "remotedoclib"
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\task.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
