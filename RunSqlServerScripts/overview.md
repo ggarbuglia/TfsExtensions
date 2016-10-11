@@ -12,6 +12,7 @@ Your local server must have the Windows Management Framework 5.0 or more.
 Your local server must have the SQLPS Powershell module, and for that follow this steps:  
 
 For SQL Server 2012  
+
 1. Navigate to https://www.microsoft.com/en-us/download/details.aspx?id=29065
 2. Expand the Install Instructions section
 3. Download both (x86 and x64) and install in the following order:
