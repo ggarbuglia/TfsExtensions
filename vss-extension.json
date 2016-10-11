@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "swissknife-tools",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "name": "Swiss Knife Tools",
     "publisher": "ggarbuglia",
     "targets": [
@@ -57,6 +57,9 @@
             "path": "RunSqlServerScripts"
         },
         {
+            "path": "PublishToSharePoint"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -80,6 +83,16 @@
             ], 
             "properties": { 
                 "name": "RunSqlServerScripts/Task" 
+            } 
+        },
+        {
+            "id": "publishtosharepoint-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "PublishToSharePoint/Task" 
             } 
         }
     ]

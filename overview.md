@@ -14,3 +14,12 @@ Then invokes SQLPS module cmdlets to run the specified scripts. Scripts are exec
 Finally the remote temporal folder is removed.
 
 See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/RunSqlServerScripts/overview.md) file for more detail.
+
+# Publish To SharePoint Task
+
+This task creates a powershell session to your remote SharePoint Server using the provided server admin credentials.
+Then makes a copy of your file(s) to a temporal folder on your remote server. 
+Then invokes SharePoint Powershell module cmdlets to upload the file(s) impersonating some user.
+Finally the remote temporal folder is removed.
+
+See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/PublishToSharePoint/overview.md) file for more detail.
