@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "publishtosharepoint-task",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "Publish To SharePoint Task",
     "publisher": "ggarbuglia",
     "targets": [

@@ -28,5 +28,8 @@ Auto Create Folder           = If your folder definition does not exists I will 
 ```
 
 ### Versions
+0.1.1  
+Overview updated.  
+
 0.1.0  
 Initial versión on Visual Studio MarketPlace.  

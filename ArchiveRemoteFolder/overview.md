@@ -22,7 +22,7 @@ Retension Days            = The archive folder retension in days.
 ```
 
 ### Versions
-0.2.5  
+0.2.6  
 Proper disposal of PSSession.  
 Try..Catch..Finally on main process.  
 
