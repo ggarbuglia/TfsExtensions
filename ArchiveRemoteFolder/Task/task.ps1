@@ -46,7 +46,7 @@ $scriptblock = {
     $retensionDays = $args[3];
 
     if (-not (Test-Path $sourcePath)) { throw "Source path '$sourcePath' does not exist."; }
-    if (-not (Test-Path $targetPath)) { throw "Target path '$targetPath' does not exist."; }
+    if (-not (Test-Path $targetPath)) { New-Item $targetPath -Type Directory | Out-Null; }
 
     if ($retensionDays -ne "0") {
         $days = [Convert]::ToInt32($retensionDays, 10);
