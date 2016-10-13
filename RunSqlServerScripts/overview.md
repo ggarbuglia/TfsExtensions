@@ -7,18 +7,8 @@ Then invokes SQLPS module cmdlets to run the specified scripts. Scripts are exec
 Finally the remote temporal folder is removed.  
 
 ### Requirements
-Your remote server must have WinRM enabled and configured.  
 Your local server must have the Windows Management Framework 5.0 or more.  
-Your local server must have the SQLPS Powershell module, and for that follow this steps:  
-
-For SQL Server 2012  
-
-1. Navigate to https://www.microsoft.com/en-us/download/details.aspx?id=29065
-2. Expand the Install Instructions section
-3. Download both (x86 and x64) and install in the following order:
-    * Microsoft® System CLR Types for Microsoft® SQL Server® 2012 (SQLSysClrTypes.msi)
-    * Microsoft® SQL Server® 2012 Shared Management Objects (SharedManagementObjects.msi)
-    * Microsoft® Windows PowerShell Extensions for Microsoft® SQL Server® 2012 (PowerShellTools.msi)
+Your remote server must have WinRM enabled and configured.
 
 ### Configuration
 ```
