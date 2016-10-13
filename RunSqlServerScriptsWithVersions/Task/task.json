@@ -1,0 +1,123 @@
+{
+  "id": "C84FFCFD-811B-4868-A9C4-2E8DC882B948",
+  "name": "RunSqlServerScriptsWithVersions",
+  "friendlyName": "Run SQL Server Scripts (with Versions)",
+  "description": "Runs T-SQL scripts on a remote SQL Server database.",
+  "author": "ggarbuglia",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+        "DotNetFramework"
+    ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Run SQL Server Scripts",
+  "groups": [
+        {
+            "name": "remoteserver",
+            "displayName": "Remote Server",
+            "isExpanded": true
+        },
+        {
+            "name": "remotedb",
+            "displayName": "Remote Database",
+            "isExpanded": true
+        }
+    ],
+  "inputs": [
+    { 
+        "name": "sourcepath", 
+        "type": "string", 
+        "label": "Source Folder", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The local folder where you have your scripts."
+    },
+    { 
+        "name": "server", 
+        "type": "string", 
+        "label": "SQL Server", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The SQL Server name you want to reach.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "instance", 
+        "type": "string", 
+        "label": "SQL Instance", 
+        "defaultValue": "Default", 
+        "required": true,
+        "helpMarkDown": "The SQL Server instance name you want to reach.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminusr", 
+        "type": "string", 
+        "label": "Admin Login", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Administrator login for the remote machine.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "adminpwd", 
+        "type": "string", 
+        "label": "Admin Password", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Password for administrator login for the remote machine.<br>It can accept variable defined in Build/Release definitions as '$(passwordVariable)'.<br>You may mark variable type as 'secret' to secure it.",
+        "groupName": "remoteserver"
+    },
+    { 
+        "name": "dbname", 
+        "type": "string", 
+        "label": "Database", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The database name you want to reach.",
+        "groupName": "remotedb"
+    },
+    { 
+        "name": "dbusr", 
+        "type": "string", 
+        "label": "Database Username", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "Username for the remote database.",
+        "groupName": "remotedb"
+    },
+    { 
+        "name": "dbpwd", 
+        "type": "string", 
+        "label": "Database Password", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "Password for the remote database.<br>It can accept variable defined in Build/Release definitions as '$(passwordVariable)'.<br>You may mark variable type as 'secret' to secure it.",
+        "groupName": "remotedb"
+    },
+    { 
+        "name": "waitseconds", 
+        "type": "string", 
+        "label": "Wait (Seconds)", 
+        "defaultValue": "3", 
+        "required": false,
+        "helpMarkDown": "The time in seconds between each script execution. Some times you need some space between executions to let the engine finish the script."
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\task.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
