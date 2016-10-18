@@ -22,6 +22,9 @@ Retension Days            = The archive folder retension in days.
 ```
 
 ### Versions
+0.2.8  
+Bug Fix: Subfolders where not included in 7z file. 
+
 0.2.7  
 Create the target folder path if doesn't exists.    
 

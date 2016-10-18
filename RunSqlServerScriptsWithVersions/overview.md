@@ -29,5 +29,5 @@ Wait (Seconds)            = The time in seconds between each script execution. S
 In order to avoid Unicode mismatch characters always remember to save your script files with **UTF-8 signed encoding**.  
 
 ### Versions
-0.1.0  
+0.1.2  
 Initial versión on Visual Studio MarketPlace.  

@@ -56,7 +56,7 @@ $scriptblock = {
 
     if (-not (Test-Path "$env:ProgramFiles\7-Zip\7z.exe")) { throw "$env:ProgramFiles\7-Zip\7z.exe needed"; } 
     Set-Alias 7z "$env:ProgramFiles\7-Zip\7z.exe"; 
-    7z a -t7z "$targetPath$fileName" "$sourcePath*.*" 
+    7z a -t7z "$targetPath$fileName" "$sourcePath" 
 };
 
 $sourcepath = ValidatePath -type "Source" -path $sourcepath;

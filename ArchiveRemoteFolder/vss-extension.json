@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "archiveremotefolder-task",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "name": "Archive Remote Folder Task",
     "publisher": "ggarbuglia",
     "targets": [

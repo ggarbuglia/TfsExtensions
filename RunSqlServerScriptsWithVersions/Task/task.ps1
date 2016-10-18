@@ -127,7 +127,7 @@ Try
     $session = New-PSSession -Name SQL -ComputerName $server -Credential $credential;
 
     Write-Host "Setting up remote session.";
-    Invoke-Command -Session $session -ScriptBlock $sb1 -ArgumentList $server, $instance, $dbname, $dbusr, $dbpwd, $targetpath, $waitseconds;
+    Invoke-Command -Session $session -ScriptBlock $sb1 -ArgumentList $server, $instance, $dbname, $dbusr, $dbpwd, $targetpath, $waitseconds -ErrorAction Stop;
     
     Write-Host "Querying Versions table on remote server.";
     $maxid = Invoke-Command -Session $session -ScriptBlock $sbq;
