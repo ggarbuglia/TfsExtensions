@@ -1,0 +1,81 @@
+{
+  "id": "ECAD77AC-53B2-4FBA-BD2F-2983CAF7932C",
+  "name": "SetAssemblyVersion",
+  "friendlyName": "Set Assembly Version",
+  "description": "Set Assembly Version on all AssemblyInfo and SharedAssemblyInfo (optional) files.",
+  "author": "ggarbuglia",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+        "DotNetFramework"
+    ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Set Assembly Version",
+  "groups": [],
+  "inputs": [
+    { 
+        "name": "rootpath", 
+        "type": "string", 
+        "label": "The Source Directory", 
+        "defaultValue": "$(Build.SourcesDirectory)", 
+        "required": true,
+        "helpMarkDown": "The build system source folder."
+    },
+    { 
+        "name": "mayornumber", 
+        "type": "string", 
+        "label": "Mayor Number", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The assembly version mayor number. Leave it blank if you want to use current mayor number."
+    },
+    { 
+        "name": "minornumber", 
+        "type": "string", 
+        "label": "Minor Number", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The assembly version minor number. Leave it blank if you want to use current minor number."
+    },
+    { 
+        "name": "buildnumber", 
+        "type": "string", 
+        "label": "Build Number", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The assembly version build number. Leave it blank if you want to use current build number."
+    },
+    { 
+        "name": "revisionnumber", 
+        "type": "string", 
+        "label": "Revision Number", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The assembly version revision number. Leave it blank if you want to use current revision number."
+    },
+    { 
+        "name": "checkforshared", 
+        "type": "boolean", 
+        "label": "Shared File", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "Check if you use a SharedAssemblyInfo file in your project."
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\task.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

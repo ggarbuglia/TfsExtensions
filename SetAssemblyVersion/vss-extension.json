@@ -1,0 +1,69 @@
+﻿{
+    "manifestVersion": 1,
+    "id": "setassemblyversion-task",
+    "version": "0.1.1",
+    "name": "Set Assembly Version Task",
+    "publisher": "ggarbuglia",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Set Assembly Version Task for TS and TFS",
+    "icons": {
+        "default": "icon128.png",
+        "large": "icon512.png"
+    },
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "utility",
+        "tasks"
+    ],
+    "screenshots": [],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/blob/master/SetAssemblyVersion/overview.md"
+        },
+        "issues": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/ggarbuglia/TfsExtensions/SetAssemblyVersion"
+        }
+	},
+    "branding": {
+        "color": "black",
+        "theme": "dark"
+    },
+    "galleryFlags": [
+        "Public"
+    ],
+    "scopes": [
+        "vso.build_execute", 
+        "vso.serviceendpoint_manage" 
+    ],
+    "files": [
+        {
+            "path": "Task"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "setassemblyversion-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "Task" 
+            } 
+        }
+    ]
+}
