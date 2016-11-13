@@ -27,7 +27,7 @@ Wait (Seconds)            = The time in seconds between each script execution. S
 In order to avoid Unicode mismatch characters always remember to save your script files with **UTF-8 signed encoding**.  
 
 ### Versions
-0.1.3  
+0.1.4  
 Proper disposal of PSSession.  
 Try..Catch..Finally on main process.  
 
