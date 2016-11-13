@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "swissknife-tools",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "name": "Swiss Knife Tools",
     "publisher": "ggarbuglia",
     "targets": [
@@ -60,6 +60,9 @@
             "path": "PublishToSharePoint"
         },
         {
+            "path": "SetAssemblyVersion"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -93,6 +96,16 @@
             ], 
             "properties": { 
                 "name": "PublishToSharePoint/Task" 
+            } 
+        },
+        {
+            "id": "setassemblyversion-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "SetAssemblyVersion/Task" 
             } 
         }
     ]

@@ -22,4 +22,9 @@ Then makes a copy of your file(s) to a temporal folder on your remote server.
 Then invokes SharePoint Powershell module cmdlets to upload the file(s) impersonating some user.  
 Finally the remote temporal folder is removed.  
 
-See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/PublishToSharePoint/overview.md) file for more detail.  
+See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/PublishToSharePoint/overview.md) file for more detail.
+
+## Set Assembly Version Task
+
+This task finds all AssemblyInfo.* files on the given root path and replace the version on them.  
+Also, if you use the SharedAssemblyInfo.* file on the root folder of your solution or elsewhere, you can make version changes there too.  
