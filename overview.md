@@ -26,5 +26,10 @@ See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/Publi
 
 ## Set Assembly Version Task
 
-This task finds all AssemblyInfo.* files on the given root path and replace the version on them.  
-Also, if you use the SharedAssemblyInfo.* file on the root folder of your solution or elsewhere, you can make version changes there too.  
+This task finds all AssemblyInfo files on the given root path and replace the version on them.  
+Also, if you use the SharedAssemblyInfo file on the root folder of your solution or elsewhere, you can make version changes there too.  
+
+## Copy Files via PS Session Task
+
+This task copies all the files from a specific path using a Powershell Session on a remote server target path.  
+Usefull for nontrusted domain or not shared servers.
