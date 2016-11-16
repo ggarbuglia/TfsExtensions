@@ -23,7 +23,7 @@ Exclude Types List        = A comma separated list of wildcard file types to exc
 ```
 
 ### Versions
-0.3.0  
+0.3.1  
 Exclude file types option added.  
 Product image rebranding.  
 

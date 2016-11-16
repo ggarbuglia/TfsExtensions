@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "5"
+    "Patch": "6"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Powershell FileCopy to $(targetpath)",
@@ -68,7 +68,7 @@
         "label": "Exclude Types List", 
         "defaultValue": "", 
         "required": false,
-        "helpMarkDown": "A comma separated list of wildcard file types to exclude.<br>Example: *.bak,*.log,*.txt."
+        "helpMarkDown": "A comma separated list of wildcard file types to exclude.<br>Example: \\*.bak,\\*.log,\\*.txt."
     }
   ],
   "execution": {
