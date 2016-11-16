@@ -6,17 +6,19 @@ param (
     [string] $targetpath,
     [string] $filename,
     [string] $datestampformat,
-    [string] $retensiondays
+    [string] $retensiondays,
+    [string] $excludetypeslist
 )
 
 Write-Host "Entering script task.ps1";
 
-Write-Verbose "[server]          --> [$server]"          -Verbose;
-Write-Verbose "[adminusr]        --> [$adminusr]"        -Verbose;
-Write-Verbose "[sourcepath]      --> [$sourcepath]"      -Verbose;
-Write-Verbose "[targetpath]      --> [$targetpath]"      -Verbose;
-Write-Verbose "[filename]        --> [$filename]"        -Verbose;
-Write-Verbose "[datestampformat] --> [$datestampformat]" -Verbose;
+Write-Verbose "[server]           --> [$server]"           -Verbose;
+Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
+Write-Verbose "[sourcepath]       --> [$sourcepath]"       -Verbose;
+Write-Verbose "[targetpath]       --> [$targetpath]"       -Verbose;
+Write-Verbose "[filename]         --> [$filename]"         -Verbose;
+Write-Verbose "[datestampformat]  --> [$datestampformat]"  -Verbose;
+Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -40,10 +42,11 @@ function ValidateFilename ([string]$name, [string]$format) {
 
 Write-Host "Creating Script Block.";
 $scriptblock = { 
-    $sourcePath    = $args[0];
-    $targetPath    = $args[1];
-    $fileName      = $args[2];
-    $retensionDays = $args[3];
+    $sourcePath       = $args[0];
+    $targetPath       = $args[1];
+    $fileName         = $args[2];
+    $retensionDays    = $args[3];
+    $excludetypeslist = $args[4];
 
     if (-not (Test-Path $sourcePath)) { throw "Source path '$sourcePath' does not exist."; }
     if (-not (Test-Path $targetPath)) { New-Item $targetPath -Type Directory | Out-Null; }
@@ -56,7 +59,18 @@ $scriptblock = {
 
     if (-not (Test-Path "$env:ProgramFiles\7-Zip\7z.exe")) { throw "$env:ProgramFiles\7-Zip\7z.exe needed"; } 
     Set-Alias 7z "$env:ProgramFiles\7-Zip\7z.exe"; 
-    7z a -t7z "$targetPath$fileName" "$sourcePath" 
+
+    $exclusionlist = "";
+
+    if ($excludetypeslist -ne "") { 
+        $excludetypes = $excludetypeslist -split ',';
+        foreach ($excludetype in $excludetypes) {
+            $exclusionlist += "-x`!$excludetype ";
+        }
+    }
+
+    Write-Host "7z a -t7z `"$targetPath$fileName`" `"$sourcePath*.*`" -r $($exclusionlist.TrimEnd())";
+    cmd /c "`"$env:ProgramFiles\7-Zip\7z.exe`" a -t7z `"$targetPath$fileName`" `"$sourcePath*.*`" -r $($exclusionlist.TrimEnd())"
 };
 
 $sourcepath = ValidatePath -type "Source" -path $sourcepath;
@@ -70,11 +84,11 @@ Try
     Write-Host "Creating Secured Credentials.";
     $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
-    Write-Host "Opening Powershel remote session on $server.";
+    Write-Host "Opening Powershell remote session on $server.";
     $session = New-PSSession -ComputerName $server -Credential $credential;
 
     Write-Host "Invoking 7z executable on remote server.";
-    Invoke-Command -Session $session -ScriptBlock $scriptblock -ArgumentList $sourcepath, $targetpath, $filename, $retensiondays;
+    Invoke-Command -Session $session -ScriptBlock $scriptblock -ArgumentList $sourcepath, $targetpath, $filename, $retensiondays, $excludetypeslist;
 }
 Catch 
 {

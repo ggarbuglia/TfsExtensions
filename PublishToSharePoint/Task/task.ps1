@@ -8,20 +8,22 @@
     [string] $username,
     [string] $doclibname,
     [string] $doclibfolder,
-    [string] $createfolders
+    [string] $createfolders,
+    [string] $excludetypeslist
 )
 
 Write-Host "Entering script task.ps1";
 
-Write-Verbose "[sourcepath]    --> [$sourcepath]"    -Verbose;
-Write-Verbose "[server]        --> [$server]"        -Verbose;
-Write-Verbose "[adminusr]      --> [$adminusr]"      -Verbose;
-Write-Verbose "[spsiteurl]     --> [$spsiteurl]"     -Verbose;
-Write-Verbose "[spweburl]      --> [$spweburl]"      -Verbose;
-Write-Verbose "[username]      --> [$username]"      -Verbose;
-Write-Verbose "[doclibname]    --> [$doclibname]"    -Verbose;
-Write-Verbose "[doclibfolder]  --> [$doclibfolder]"  -Verbose;
-Write-Verbose "[createfolders] --> [$createfolders]" -Verbose;
+Write-Verbose "[sourcepath]       --> [$sourcepath]"       -Verbose;
+Write-Verbose "[server]           --> [$server]"           -Verbose;
+Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
+Write-Verbose "[spsiteurl]        --> [$spsiteurl]"        -Verbose;
+Write-Verbose "[spweburl]         --> [$spweburl]"         -Verbose;
+Write-Verbose "[username]         --> [$username]"         -Verbose;
+Write-Verbose "[doclibname]       --> [$doclibname]"       -Verbose;
+Write-Verbose "[doclibfolder]     --> [$doclibfolder]"     -Verbose;
+Write-Verbose "[createfolders]    --> [$createfolders]"    -Verbose;
+Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -73,6 +75,14 @@ Try
 
     Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath*.*" -Destination $targetpath -ToSession $session -Force;
+
+    if ($excludetypeslist -ne "") { 
+        Write-Host "Removing excluded files from remote session.";
+        $excludetypes = $excludetypeslist -split ',';
+        foreach ($excludetype in $excludetypes) {
+            Invoke-Command -Session $session -ScriptBlock { Get-ChildItem $args[0] -Recurse -Include $args[1] | Remove-Item; } -ArgumentList $targetpath, $excludetype;
+        }
+    }
 
     Write-Host "Running upload process on remote session.";
     Invoke-Command -Session $session -FilePath $uploadps1 -ArgumentList $spsiteurl, $spweburl, $username, $doclibname, $doclibfolder, $targetpath, "5", $createfolders;

@@ -25,9 +25,14 @@ User Account      (required) = The user account [domain\username] to impersonate
 Library Name      (required) = The SharePoint Document Library name.
 Folder Path                  = The folder or folder path inside your Document Library (like 'level1/level2').
 Auto Create Folder           = If your folder definition does not exists I will create it for you.
+Exclude Types List           = A comma separated list of wildcard file types to exclude.
 ```
 
 ### Versions
+0.1.5  
+Exclude file types option added.  
+Product image rebranding.  
+
 0.1.1  
 Overview updated.  
 

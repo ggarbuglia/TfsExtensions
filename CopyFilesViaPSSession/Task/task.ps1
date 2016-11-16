@@ -3,15 +3,17 @@ param (
     [string] $server,
     [string] $adminusr,
     [string] $adminpwd,
-    [string] $targetpath
+    [string] $targetpath,
+    [string] $excludetypeslist
 )
 
 Write-Host "Entering script task.ps1";
 
-Write-Verbose "[sourcepath]  --> [$sourcepath]"  -Verbose;
-Write-Verbose "[server]      --> [$server]"      -Verbose;
-Write-Verbose "[adminusr]    --> [$adminusr]"    -Verbose;
-Write-Verbose "[targetpath]  --> [$targetpath]"  -Verbose;
+Write-Verbose "[sourcepath]       --> [$sourcepath]"       -Verbose;
+Write-Verbose "[server]           --> [$server]"           -Verbose;
+Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
+Write-Verbose "[targetpath]       --> [$targetpath]"       -Verbose;
+Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -33,9 +35,17 @@ Try
 
     Write-Host "Opening Powershell remote session on $server.";
     $session = New-PSSession -ComputerName $server -Credential $credential;
-    
-    Write-Host "Copying scripts to remote session.";
+
+    Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath**" -Destination $targetpath -ToSession $session -Recurse -Force;
+
+    if ($excludetypeslist -ne "") { 
+        Write-Host "Removing excluded files from remote session.";
+        $excludetypes = $excludetypeslist -split ',';
+        foreach ($excludetype in $excludetypes) {
+            Invoke-Command -Session $session -ScriptBlock { Get-ChildItem $args[0] -Recurse -Include $args[1] | Remove-Item; } -ArgumentList $targetpath, $excludetype;
+        }
+    }
 }
 Catch 
 {

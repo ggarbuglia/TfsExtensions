@@ -15,8 +15,13 @@ Remote Machine (required) = The FQDN of the remote machine you want to reach (or
 Admin Login    (required) = The administrator login account [domain\username] for the remote machine.
 Admin Password (required) = The administrator password for the remote machine. I recommend a variable marked as secret.
 Target Path    (required) = A local path on the remote server.
+Exclude Types List        = A comma separated list of wildcard file types to exclude.
 ```
 
 ### Versions
+0.1.5  
+Exclude file types option added.  
+Product image rebranding.  
+
 0.1.0  
 Initial versión on Visual Studio MarketPlace.  

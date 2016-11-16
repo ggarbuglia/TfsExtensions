@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "swissknife-tools",
-    "version": "0.1.9",
+    "version": "0.2.0",
     "name": "Swiss Knife Tools",
     "publisher": "ggarbuglia",
     "targets": [

@@ -24,6 +24,9 @@ Revision Number = The assembly version revision number. Leave it blank if you wa
 Shared File     = Check if you use a SharedAssemblyInfo file in your project.
 ```
 
-### Versions 
+### Versions
+0.1.5  
+Product image rebranding. 
+
 0.1.0  
 Initial versión on Visual Studio MarketPlace.  

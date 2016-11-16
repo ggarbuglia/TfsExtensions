@@ -19,9 +19,14 @@ Target Path    (required) = A local path on the remote server or a network share
 7z Filename    (required) = A file name, with or without extension.
 Date Stamp Format         = A file name datetime format.
 Retension Days            = The archive folder retension in days.
+Exclude Types List        = A comma separated list of wildcard file types to exclude from archive.
 ```
 
 ### Versions
+0.3.0  
+Exclude file types option added.  
+Product image rebranding.  
+
 0.2.8  
 Bug Fix: Subfolders where not included in 7z file. 
 

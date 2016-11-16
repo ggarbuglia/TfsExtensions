@@ -15,8 +15,8 @@
     ],
   "version": {
     "Major": "0",
-    "Minor": "2",
-    "Patch": "8"
+    "Minor": "3",
+    "Patch": "0"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Archive Remote Folder $(sourcepath)",
@@ -92,7 +92,7 @@
         "type": "string", 
         "label": "Date Stamp Format", 
         "defaultValue": "yyyyMMddhhmm", 
-        "required": true,
+        "required": false,
         "helpMarkDown": "The archive file name datetime format.",
         "groupName": "remotepaths"
     },
@@ -101,10 +101,20 @@
         "type": "string", 
         "label": "Retension Days", 
         "defaultValue": "0", 
-        "required": true,
+        "required": false,
         "helpMarkDown": "The archive folder retension in days (0 = retain all).",
         "groupName": "remotepaths"
+    },
+    { 
+        "name": "excludetypeslist", 
+        "type": "string", 
+        "label": "Exclude Types List", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "A comma separated list of wildcard file types to exclude from archive.<br>Example: *.bak,*.log,*.txt.",
+        "groupName": "remotepaths"
     }
+
   ],
   "execution": {
     "PowerShell": {
