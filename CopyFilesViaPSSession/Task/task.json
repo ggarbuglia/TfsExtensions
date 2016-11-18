@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "6"
+    "Patch": "7"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Powershell FileCopy to $(targetpath)",
@@ -24,7 +24,7 @@
   "inputs": [
     { 
         "name": "sourcepath", 
-        "type": "string", 
+        "type": "filePath", 
         "label": "Source Path", 
         "defaultValue": "", 
         "required": true,

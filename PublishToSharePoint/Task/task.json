@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "6"
+    "Patch": "7"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Publish To SharePoint",
@@ -40,11 +40,11 @@
   "inputs": [
     { 
         "name": "sourcepath", 
-        "type": "string", 
+        "type": "filePath", 
         "label": "Source Folder", 
         "defaultValue": "", 
         "required": true,
-        "helpMarkDown": "The local folder where you have your file(s)."
+        "helpMarkDown": "The folder where you have your file(s)."
     },
     { 
         "name": "excludetypeslist", 

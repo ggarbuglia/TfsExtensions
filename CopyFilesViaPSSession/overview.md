@@ -19,7 +19,8 @@ Exclude Types List        = A comma separated list of wildcard file types to exc
 ```
 
 ### Versions
-0.1.6  
+0.1.7
+Source Path parameter changed to path picker type.  
 Exclude file types option added.  
 Product image rebranding.  
 

@@ -16,7 +16,7 @@ AssemblyInformationalVersion: [assembly: AssemblyInformationalVersion("x.x aaaaa
 
 ### Configuration
 ```
-The Source Directory (required) = The build system source folder.
+Source Directory (required) = The build system source folder.
 Mayor Number    = The assembly version mayor number. Leave it blank if you want to use current mayor number.
 Minor Number    = The assembly version minor number. Leave it blank if you want to use current minor number.
 Build Number    = The assembly version build number. Leave it blank if you want to use current build number.
@@ -25,7 +25,8 @@ Shared File     = Check if you use a SharedAssemblyInfo file in your project.
 ```
 
 ### Versions
-0.1.5  
+0.1.7  
+Source Directory parameter changed to path picker type.  
 Product image rebranding. 
 
 0.1.0  

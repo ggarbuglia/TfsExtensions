@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "5"
+    "Patch": "7"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Set Assembly Version",
@@ -24,8 +24,8 @@
   "inputs": [
     { 
         "name": "rootpath", 
-        "type": "string", 
-        "label": "The Source Directory", 
+        "type": "filePath", 
+        "label": "Source Directory", 
         "defaultValue": "$(Build.SourcesDirectory)", 
         "required": true,
         "helpMarkDown": "The build system source folder."

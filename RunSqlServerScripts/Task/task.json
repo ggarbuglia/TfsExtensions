@@ -16,7 +16,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "5"
+    "Patch": "7"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Run SQL Server Scripts",
@@ -35,11 +35,11 @@
   "inputs": [
     { 
         "name": "sourcepath", 
-        "type": "string", 
+        "type": "filePath", 
         "label": "Source Folder", 
         "defaultValue": "", 
         "required": true,
-        "helpMarkDown": "The local folder where you have your scripts."
+        "helpMarkDown": "The folder where you have your scripts."
     },
     { 
         "name": "server", 
