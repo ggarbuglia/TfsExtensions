@@ -1,7 +1,7 @@
 ﻿{
     "manifestVersion": 1,
     "id": "swissknife-tools",
-    "version": "0.2.2",
+    "version": "0.2.7",
     "name": "Swiss Knife Tools",
     "publisher": "ggarbuglia",
     "targets": [
@@ -66,6 +66,9 @@
             "path": "CopyFilesViaPSSession"
         },
         {
+            "path": "InternetInformationServerActions"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -119,6 +122,16 @@
             ], 
             "properties": { 
                 "name": "CopyFilesViaPSSession/Task" 
+            } 
+        },
+        {
+            "id": "iisactions-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ], 
+            "properties": { 
+                "name": "InternetInformationServerActions/Task" 
             } 
         }
     ]

@@ -6,7 +6,7 @@ Usefull for nontrusted domain or not shared servers.
 
 ### Requirements
 1. Both ends must have WinRM 5.0.
-1. Remote server must have Powershell Remoting enabled.
+2. Remote server must have Powershell Remoting enabled.
 
 ### Configuration
 ```

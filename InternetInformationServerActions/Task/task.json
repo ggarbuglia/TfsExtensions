@@ -1,0 +1,86 @@
+{
+  "id": "9176B2B3-CEFF-4AEB-B4D6-78CCD7AA6502",
+  "name": "InternetInformationServerActions",
+  "friendlyName": "Internet Information Server Actions",
+  "description": "Performs basic actions on remote IIS.",
+  "author": "ggarbuglia",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+        "DotNetFramework"
+    ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "5"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Perform $(action) in $(server)",
+  "groups": [],
+  "inputs": [
+    { 
+        "name": "server", 
+        "type": "string", 
+        "label": "Remote Machine", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "FQDN of the remote machine you want to reach (or the IP Address)."
+    },
+    { 
+        "name": "adminusr", 
+        "type": "string", 
+        "label": "Admin Username", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Administrator login for the remote machine."
+    },
+    { 
+        "name": "adminpwd", 
+        "type": "string", 
+        "label": "Admin Password", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "Password for administrator login for the remote machine.<br>It can accept variable defined in Build/Release definitions as '$(passwordVariable)'.<br>You may mark variable type as 'secret' to secure it."
+    },
+    { 
+        "name": "action", 
+        "type": "pickList", 
+        "label": "Action", 
+        "defaultValue": "", 
+        "required": true,
+        "helpMarkDown": "The action to perform on IIS.",
+        "options": {
+            "Stop": "Stop",
+            "Start": "Start",
+            "Restart": "Restart"
+        }
+    },
+    { 
+        "name": "webs", 
+        "type": "string", 
+        "label": "Web Site(s)", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The comma separated list of web site(s) name(s) to perform the action. Leave it blank to perform action on the entire IIS."
+    },
+    { 
+        "name": "apppools", 
+        "type": "string", 
+        "label": "App Pool(s)", 
+        "defaultValue": "", 
+        "required": false,
+        "helpMarkDown": "The comma separated list of application pool(s) name(s) to perform the action. Leave it blank to perform action on the entire IIS."
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\task.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

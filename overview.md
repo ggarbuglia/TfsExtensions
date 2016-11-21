@@ -37,3 +37,9 @@ This task copies all the files from a specific path using a Powershell Session o
 Usefull for nontrusted domain or not shared servers.  
 
 See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/CopyFilesViaPSSession/overview.md) file for more detail.
+
+## Internet Information Server Actions Task
+
+This task performs basic actions on remote IIS, Web Sites or Application Pools like Start, Stop, Restart and Recycle.
+
+See the [overview](https://github.com/ggarbuglia/TfsExtensions/blob/master/InternetInformationServerActions/overview.md) file for more detail.
