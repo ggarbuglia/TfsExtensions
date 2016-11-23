@@ -25,6 +25,9 @@ Shared File     = Check if you use a SharedAssemblyInfo file in your project.
 ```
 
 ### Versions
+0.1.8  
+Bug fix. 
+
 0.1.7  
 Source Directory parameter changed to path picker type.  
 Product image rebranding. 

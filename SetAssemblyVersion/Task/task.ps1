@@ -90,7 +90,7 @@ Try
         # Get all Assembly Information files recursive and foreach file...
         Get-ChildItem -Path $rootpath -Recurse | where {$_.Name -eq $file} | foreach { 
             
-            Write-Error "Processing file " + $_.FullName;
+            Write-Host "Processing file $($_.FullName)";
 
             # Get the content of the file and for each line...
             (Get-Content $_.FullName) | foreach { 
