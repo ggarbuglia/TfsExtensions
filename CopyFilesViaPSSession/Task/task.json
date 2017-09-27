@@ -85,7 +85,7 @@
         "label": "Authentication Mechanism", 
         "defaultValue": "Default", 
         "required": true,
-        "helpMarkDown": "Select authentication Mechasmin (Default,Basic,Credssp,Digest,Kerberos,Negotiate,NegotiateWithImplicitCredential)"
+        "helpMarkDown": "The Authentication Mechasmin (Default,Basic,Credssp,Digest,Kerberos,Negotiate,NegotiateWithImplicitCredential)"
     },
     {
         "name": "skipcertificatechecks", 
