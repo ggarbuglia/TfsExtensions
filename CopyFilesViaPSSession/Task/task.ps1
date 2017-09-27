@@ -4,7 +4,8 @@ param (
     [string] $adminusr,
     [string] $adminpwd,
     [string] $targetpath,
-    [string] $excludetypeslist
+    [string] $excludetypeslist,
+    [boolean] $verifycertificate
 )
 
 Write-Host "Entering script task.ps1";
@@ -14,6 +15,7 @@ Write-Verbose "[server]           --> [$server]"           -Verbose;
 Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
 Write-Verbose "[targetpath]       --> [$targetpath]"       -Verbose;
 Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
+Write-Verbose "[verifycertificate] --> [$verifycertificate]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -33,8 +35,11 @@ Try
     Write-Host "Creating Secured Credentials.";
     $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
+    # verifycertficate true/false
+    $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -UseSSL -Authentication Basic;
+
     Write-Host "Opening Powershell remote session on $server.";
-    $session = New-PSSession -ComputerName $server -Credential $credential;
+    $session = New-PSSession -ComputerName $server -Credential $credential -SessionOption $sessionoptions;
 
     Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath**" -Destination $targetpath -ToSession $session -Recurse -Force;

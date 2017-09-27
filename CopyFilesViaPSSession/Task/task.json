@@ -69,7 +69,15 @@
         "defaultValue": "", 
         "required": false,
         "helpMarkDown": "A comma separated list of wildcard file types to exclude.<br>Example: \\*.bak,\\*.log,\\*.txt."
-    }
+    },
+    { 
+      "name": "verifycertificate", 
+      "type": "boolean", 
+      "label": "Verify Remote Certificate", 
+      "defaultValue": "true", 
+      "required": false,
+      "helpMarkDown": "Validate Certificate Common Name, Chain and Revocation"
+  }
   ],
   "execution": {
     "PowerShell": {
