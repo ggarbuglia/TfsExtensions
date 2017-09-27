@@ -5,7 +5,8 @@ param (
     [string] $adminpwd,
     [string] $targetpath,
     [string] $excludetypeslist,
-    [boolean] $verifycertificate
+    [string] $authenticationmechanism,
+    [boolean] $skipcertificatechecks
 )
 
 Write-Host "Entering script task.ps1";
@@ -15,7 +16,8 @@ Write-Verbose "[server]           --> [$server]"           -Verbose;
 Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
 Write-Verbose "[targetpath]       --> [$targetpath]"       -Verbose;
 Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
-Write-Verbose "[verifycertificate] --> [$verifycertificate]" -Verbose;
+Write-Verbose "[authenticationmechanism] --> [$authenticationmechanism]" -Verbose;
+Write-Verbose "[skipcertificatechecks] --> [$skipcertificatechecks]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -35,11 +37,15 @@ Try
     Write-Host "Creating Secured Credentials.";
     $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
-    # verifycertficate true/false
-    $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -UseSSL -Authentication Basic;
-
+    if ($skipcertificatechecks -eq $true) { 
+        Write-Host "Skipping certificate checks against remote CommonName, Certificate Authoriy and Revocation.";
+        $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck;
+    } else {
+        $sessionoptions = "";
+    }
+    
     Write-Host "Opening Powershell remote session on $server.";
-    $session = New-PSSession -ComputerName $server -Credential $credential -SessionOption $sessionoptions;
+    $session = New-PSSession -ComputerName $server -Credential $credential -Authentication $authenticationmechanism -SessionOption $sessionoptions;
 
     Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath**" -Destination $targetpath -ToSession $session -Recurse -Force;

@@ -71,13 +71,30 @@
         "helpMarkDown": "A comma separated list of wildcard file types to exclude.<br>Example: \\*.bak,\\*.log,\\*.txt."
     },
     { 
-      "name": "verifycertificate", 
-      "type": "boolean", 
-      "label": "Verify Remote Certificate", 
-      "defaultValue": "true", 
-      "required": false,
-      "helpMarkDown": "Validate Certificate Common Name, Chain and Revocation"
-  }
+        "name": "authenticationmechanism",
+        "type": "string", 
+        "allowedValues": [
+          "Default",
+          "Basic",
+          "Credssp",
+          "Digest",
+          "Kerberos",
+          "Negotiate",
+          "NegotiateWithImplicitCredential"
+        ],
+        "label": "Authentication Mechanism", 
+        "defaultValue": "Default", 
+        "required": true,
+        "helpMarkDown": "Select authentication Mechasmin (Default,Basic,Credssp,Digest,Kerberos,Negotiate,NegotiateWithImplicitCredential)"
+    },
+    {
+        "name": "skipcertificatechecks", 
+        "type": "boolean", 
+        "label": "Skip Certificate Checking", 
+        "defaultValue": "false", 
+        "required": false,
+        "helpMarkDown": "Skip certificate validation for CommonName, Certificate Authority and Revocation"
+    }
   ],
   "execution": {
     "PowerShell": {
