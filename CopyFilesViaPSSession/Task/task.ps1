@@ -41,7 +41,7 @@ Try
         Write-Host "Skipping certificate checks against remote CommonName, Certificate Authoriy and Revocation.";
         $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck;
         Write-Host "Opening Powershell remote session on $server.";
-        $session = New-PSSession -ComputerName $server -Credential $credential -UseSSL $true -Authentication $authenticationmechanism -SessionOption $sessionoptions;
+        $session = New-PSSession -ComputerName $server -Credential $credential -UseSSL -Authentication $authenticationmechanism -SessionOption $sessionoptions;
     } else {
         $sessionoptions = "";
         Write-Host "Opening Powershell remote session on $server.";
