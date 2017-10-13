@@ -40,13 +40,14 @@ Try
     if ($skipcertificatechecks -eq $true) { 
         Write-Host "Skipping certificate checks against remote CommonName, Certificate Authoriy and Revocation.";
         $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck;
+        Write-Host "Opening Powershell remote session on $server.";
+        $session = New-PSSession -ComputerName $server -Credential $credential -UseSSL $true -Authentication $authenticationmechanism -SessionOption $sessionoptions;
     } else {
         $sessionoptions = "";
+        Write-Host "Opening Powershell remote session on $server.";
+        $session = New-PSSession -ComputerName $server -Credential $credential -Authentication $authenticationmechanism -SessionOption $sessionoptions;
     }
     
-    Write-Host "Opening Powershell remote session on $server.";
-    $session = New-PSSession -ComputerName $server -Credential $credential -Authentication $authenticationmechanism -SessionOption $sessionoptions;
-
     Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath**" -Destination $targetpath -ToSession $session -Recurse -Force;
 
