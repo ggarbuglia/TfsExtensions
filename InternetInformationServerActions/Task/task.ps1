@@ -20,6 +20,54 @@ $sb = {
     [string] $webs     = $args[1];
     [string] $apppools = $args[2];
 
+    function Stop-WebAppPoolInner ($pool) {
+        if (-not(Test-Path IIS:\AppPools\$pool)) {
+            Write-Warning "App Pool '$pool' doesn't exist, ignoring..."
+        }
+        elseif ((Get-WebAppPoolState "$pool").Value -eq "Stopped") {
+            Write-Host "App Pool '$pool' has already stopped, nothing to do."
+        }
+        else {
+            Write-Host "Stopping App Pool '$pool'.";
+            Stop-WebAppPool -Name "$pool";
+        }
+    }
+    function Start-WebAppPoolInner ($pool) {
+        if (-not(Test-Path IIS:\AppPools\$pool)) {
+            Write-Warning "App Pool '$pool' doesn't exist, ignoring..."
+        }
+        elseif ((Get-WebAppPoolState "$pool").Value -eq "Started") {
+            Write-Host "App Pool '$pool' has already started, nothing to do."
+        }
+        else {
+            Write-Host "Starting App Pool '$pool'.";
+            Start-WebAppPool -Name "$pool";
+        }
+    }
+    function Stop-WebsiteInner ($web) {
+        if (-not(Test-Path IIS:\Sites\$web)) {
+            Write-Warning "Web Site '$web' doesn't exist, ignoring..."
+        }
+        elseif ((Get-WebsiteState "$web").Value -eq "Stopped") {
+            Write-Host "Web Site '$web' has already stopped, nothing to do."
+        }
+        else {
+            Write-Host "Stopping Web Site '$web'.";
+            Stop-Website -Name "$web";
+        }
+    }
+    function Start-WebsiteInner ($web) {
+        if (-not(Test-Path IIS:\Sites\$web)) {
+            Write-Warning "Web Site '$web' doesn't exist, ignoring..."
+        }
+        elseif ((Get-WebsiteState "$web").Value -eq "Started") {
+            Write-Host "Web Site '$web' has already started, nothing to do."
+        }
+        else {
+            Write-Host "Starting Web Site '$web'.";
+            Start-Website -Name "$web";
+        }
+    }
     if ($webs.TrimEnd() -eq "" -and $apppools.TrimEnd() -eq "") {
         Write-Warning "No webs or app pools declared. Action will be performed on IIS.";
         switch ($action) {
@@ -45,15 +93,13 @@ $sb = {
                 # When STOP > first Webs then AppPools
                 if ($webs.TrimEnd() -ne "") { 
                     foreach ($web in ($webs -split ',')) {
-                        Write-Host "Stopping Web Site '$web'.";
-                        Stop-Website -Name "$web";
+                        Stop-WebsiteInner "$web"
                     }
                 }
 
                 if ($apppools.TrimEnd() -ne "") { 
                     foreach ($pool in ($apppools -split ',')) {
-                        Write-Host "Stopping App Pool '$pool'.";
-                        Stop-WebAppPool -Name "$pool";
+                        Stop-WebAppPoolInner "$pool"
                     }
                 }
             }
@@ -61,44 +107,38 @@ $sb = {
                 # When START > first AppPools then Webs
                 if ($apppools.TrimEnd() -ne "") { 
                     foreach ($pool in ($apppools -split ',')) {
-                        Write-Host "Starting App Pool '$pool'.";
-                        Start-WebAppPool -Name "$pool"; 
+                        Start-WebAppPoolInner "$pool"
                     }
                 }
 
                 if ($webs.TrimEnd() -ne "") { 
                     foreach ($web in ($webs -split ',')) {
-                        Write-Host "Starting Web Site '$web'.";
-                        Start-Website -Name "$web";
+                        Stop-WebsiteInner "$web"
                     }
                 }
             }
             "Restart" { 
                 if ($webs.TrimEnd() -ne "") { 
                     foreach ($web in ($webs -split ',')) {
-                        Write-Host "Stopping Web Site '$web'.";
-                        Stop-Website -Name "$web";
+                        Stop-WebsiteInner "$web"
                     }
                 }
 
                 if ($apppools.TrimEnd() -ne "") { 
                     foreach ($pool in ($apppools -split ',')) {
-                        Write-Host "Stopping App Pool '$pool'.";
-                        Stop-WebAppPool -Name "$pool";
+                        Stop-WebAppPoolInner "$pool"
                     }
                 }
 
                 if ($apppools.TrimEnd() -ne "") { 
                     foreach ($pool in ($apppools -split ',')) {
-                        Write-Host "Starting App Pool '$pool'.";
-                        Start-WebAppPool -Name "$pool"; 
+                        Start-WebAppPoolInner "$pool"
                     }
                 }
 
                 if ($webs.TrimEnd() -ne "") { 
                     foreach ($web in ($webs -split ',')) {
-                        Write-Host "Starting Web Site '$web'.";
-                        Start-Website -Name "$web";
+                        Start-WebsiteInner "$web";
                     }
                 }
             }
