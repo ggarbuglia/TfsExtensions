@@ -4,7 +4,9 @@ param (
     [string] $adminusr,
     [string] $adminpwd,
     [string] $targetpath,
-    [string] $excludetypeslist
+    [string] $excludetypeslist,
+    [string] $authenticationmechanism,
+    [boolean] $skipcertificatechecks
 )
 
 Write-Host "Entering script task.ps1";
@@ -14,6 +16,8 @@ Write-Verbose "[server]           --> [$server]"           -Verbose;
 Write-Verbose "[adminusr]         --> [$adminusr]"         -Verbose;
 Write-Verbose "[targetpath]       --> [$targetpath]"       -Verbose;
 Write-Verbose "[excludetypeslist] --> [$excludetypeslist]" -Verbose;
+Write-Verbose "[authenticationmechanism] --> [$authenticationmechanism]" -Verbose;
+Write-Verbose "[skipcertificatechecks] --> [$skipcertificatechecks]" -Verbose;
 
 ### Validates all paths ###
 function ValidatePath ([string]$type, [string]$path) {
@@ -33,9 +37,17 @@ Try
     Write-Host "Creating Secured Credentials.";
     $credential = New-Object System.Management.Automation.PSCredential($adminusr, (ConvertTo-SecureString -String $adminpwd -AsPlainText -Force));
 
-    Write-Host "Opening Powershell remote session on $server.";
-    $session = New-PSSession -ComputerName $server -Credential $credential;
-
+    if ($skipcertificatechecks -eq $true) { 
+        Write-Host "Skipping certificate checks against remote CommonName, Certificate Authoriy and Revocation.";
+        $sessionoptions = New-PSsessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck;
+        Write-Host "Opening Powershell remote session on $server.";
+        $session = New-PSSession -ComputerName $server -Credential $credential -UseSSL -Authentication $authenticationmechanism -SessionOption $sessionoptions;
+    } else {
+        $sessionoptions = "";
+        Write-Host "Opening Powershell remote session on $server.";
+        $session = New-PSSession -ComputerName $server -Credential $credential -Authentication $authenticationmechanism -SessionOption $sessionoptions;
+    }
+    
     Write-Host "Copying files to remote session.";
     Copy-Item -Path "$sourcepath**" -Destination $targetpath -ToSession $session -Recurse -Force;
 
