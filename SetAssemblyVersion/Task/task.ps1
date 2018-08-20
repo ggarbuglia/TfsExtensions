@@ -1,4 +1,4 @@
-﻿param (
+param (
     [string] $rootpath,
     [string] $mayornumber,
     [string] $minornumber,
@@ -94,21 +94,13 @@ Try
 
             # Get the content of the file and for each line...
             (Get-Content $_.FullName) | foreach { 
-
-                $chk = MatchAndReplaceVersion -content $_ -type "AssemblyFileVersion"; 
-                if ($_ -ne $chk) { return $chk; } 
-                
-                $chk = MatchAndReplaceVersion -content $_ -type "AssemblyVersion"; 
-                if ($_ -ne $chk) { return $chk; } 
-
-                $chk = MatchAndReplaceInformationalVersion -content $_ -type "Beta"; 
-                if ($_ -ne $chk) { return $chk; } 
-
-                $chk = MatchAndReplaceInformationalVersion -content $_ -type "Final"; 
-                if ($_ -ne $chk) { return $chk; } 
-
+                $_ = $_ -replace '\s*\/\/.*','' #trim comments
+                $_ = MatchAndReplaceVersion -content $_ -type "AssemblyFileVersion";                
+                $_ = MatchAndReplaceVersion -content $_ -type "AssemblyVersion"; 
+                $_ = MatchAndReplaceInformationalVersion -content $_ -type "Beta"; 
+                $_ = MatchAndReplaceInformationalVersion -content $_ -type "Final"; 
                 return "$_";
-
+                
             } | Set-Content $_.FullName;
         }
     }
