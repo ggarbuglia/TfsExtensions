@@ -17,6 +17,9 @@ App Pool(s)               = The comma separated list of application pool(s) name
 ```
 
 ### Versions
+0.2.0
+Add handler for website/app pool's status before taking action
+
 0.1.5  
 Bug fixes.  
 

@@ -15,8 +15,8 @@
     ],
   "version": {
     "Major": "0",
-    "Minor": "1",
-    "Patch": "5"
+    "Minor": "2",
+    "Patch": "1"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Perform $(action) in $(server)",
