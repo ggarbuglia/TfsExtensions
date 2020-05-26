@@ -1,4 +1,4 @@
 # TfsExtensions
 TFS Build and Release Extensions
 
-**PLEASE DO NOT USE THIS EXTENSIONS.**
+**PLEASE DO NOT USE THIS EXTENSIONS. PROJECT IS CLOSED.**
